@@ -1,0 +1,24 @@
+import os
+from dataclasses import dataclass
+
+@dataclass
+class Config:
+    # Model Specs
+    EMBEDDING_MODEL_NAME: str = "BAAI/bge-m3"
+    GENERATIVE_MODEL: str = "gpt-4o"  # or claude-3-5-sonnet-20241022
+    
+    # Vector DB
+    QDRANT_HOST: str = os.getenv("QDRANT_HOST", "localhost")
+    QDRANT_PORT: int = int(os.getenv("QDRANT_PORT", 6333))
+    COLLECTION_NAME: str = "legal_contracts"
+    VECTOR_SIZE: int = 1024  # Dense dimension for bge-m3
+    
+    # Chunking
+    CHUNK_SIZE_TOKENS: int = 512
+    CHUNK_OVERLAP_TOKENS: int = 64
+    
+    # API Keys
+    OPENAI_API_KEY: str = os.getenv("OPENAI_API_KEY", "")
+    COHERE_API_KEY: str = os.getenv("COHERE_API_KEY", "")
+
+config = Config()
